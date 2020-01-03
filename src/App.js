@@ -193,7 +193,7 @@ class App extends Component {
       <Card.Body>
       <div>
             {(() => {
-              if (this.state.producersCount === 0) {
+              if (this.state.producersCount == 0) {
                 return (
                   <div><table className="table">
                   <thead>
@@ -274,7 +274,7 @@ class App extends Component {
       <Card.Body>
         <div>
             {(() => {
-              if (this.state.mandatsCount === 0) {
+              if (this.state.mandatsCount == 0) {
                 return (
                   <div><table className="table">
                   <thead>
@@ -293,7 +293,7 @@ class App extends Component {
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">MandatType</th>
+                      <th scope="col">Type de mandat</th>
                       
                     </tr>
                   </thead>
