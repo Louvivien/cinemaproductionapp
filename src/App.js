@@ -23,10 +23,14 @@ class App extends Component {
         account: '',
         contratProduction: '',
         visible : false,
+        visible2 : false,
         producersCount: 0,
         producers: [],
         producerName: '', 
         producerShare: '',
+        mandatsCount: 0,
+        mandats: [],
+        mandatType: '',
         loading: true,
         text: '', inputText: '', mode:'nothing',
       }
@@ -79,9 +83,20 @@ class App extends Component {
                   producers: [...this.state.producers, producer]
                 })
               }
+          //on charge les infos mandat
+          const mandatsCount = await _contratProduction.methods.mandatsCount().call()
+          this.setState({ mandatsCount })
+              // Load producers
+              for (var i = 1; i <= mandatsCount; i++) {
+                const mandat = await _contratProduction.methods.mandats(i).call()
+                this.setState({
+                  mandats: [...this.state.mandats, mandat]
+                })
+              }
+
           this.setState({ loading: false})
           } else {
-          window.alert('contratProduction contract not deployed to detected network.')
+          window.alert('Contract not deployed to detected network.')
           }
           }
 
@@ -101,43 +116,47 @@ class App extends Component {
             });
         }
 
+        openModal2() {
+          this.setState({
+              visible2 : true
+          });
+      }
+
+      closeModal2() {
+          this.setState({
+              visible2 : false
+          });
+      }
+
         
 
-  runExample = async () => {
-    const { accounts, contract } = this.state;
+  
 
-    // Stores a given value, 5 by default.
-    //await contract.methods.set(5).send({ from: accounts[0] });
-
-    // Get the value from the contract to prove it worked.
-   //const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    //this.setState({ storageValue: response });
-  };
-
+  //premiere fonction add producer
   async addProd(producerName, producerShare) {
     this.setState({ loading: true })
 
     const {account, web3, contratProduction} = this.state
-    // Stores a given value, 5 by default.
     const contract = new web3.eth.Contract(jsonProduction.abi, contratProduction)
      await contract.methods.addProducer(producerName, producerShare).send({from: account})
      this.setState({ loading: false })
      this.closeModal();
-     
-
-    // Get the value from the contract to prove it worked.
-   //const response = await contract.methods.get().call();
-     // Update state with the result.
-    //this.setState({ storageValue: response });
     };
 
-
+     //deuxieme fonctionadd mandat
+     async addMand(mandatType) {
+      this.setState({ loading: true })
+  
+      const {account, web3, contratProduction} = this.state
+      const contract = new web3.eth.Contract(jsonProduction.abi, contratProduction)
+       await contract.methods.addMandat(mandatType).send({from: account})
+       this.setState({ loading: false })
+       this.closeModal2();
+      };
 
 
   render() {
-    const { producerName, producerShare, account, producers, producersCount } = this.state
+    const { producerName, producerShare, mandatType } = this.state
     return (
       <div className="App">
          
@@ -174,7 +193,7 @@ class App extends Component {
       <Card.Body>
       <div>
             {(() => {
-              if (this.state.producersCount == 0) {
+              if (this.state.producersCount === 0) {
                 return (
                   <div><table className="table">
                   <thead>
@@ -252,10 +271,79 @@ class App extends Component {
       Mandats
     </Accordion.Toggle>
     <Accordion.Collapse eventKey="1">
-      <Card.Body>Il n'y a pas de mandats pour l'instant
+      <Card.Body>
+        <div>
+            {(() => {
+              if (this.state.mandatsCount === 0) {
+                return (
+                  <div><table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Type de mandat</th>
+
+                    </tr>
+                  </thead>
+                
+                </table>il n'y a pas de mandat pour l'instant</div>
+                )
+              } else {
+                return (
+                  <div><table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">MandatType</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                      { this.state.mandats.map((mandat, key) => {
+                            return(
+                              <tr key={key}>
+                                <th scope="row">{mandat.id.toString()}</th>
+                                <td>{mandat.mandatType}</td>
+                                
+                                </tr>
+                            )
+                          })}
+        
+                  </tbody>
+                </table></div>
+                )
+              }
+            })()}
+    </div>
+             
+
       <br></br>
       <br></br>
-      <Button variant="outline-primary" size="sm" value="Open" >Ajouter un mandat</Button>
+      <Button variant="outline-primary" size="sm" value="Open" onClick={() => this.openModal2()} >Ajouter un mandat</Button>
+
+      <Modal visible={this.state.visible2} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal2()}>
+              <Card>
+                    <Card.Header as="h5">Ajouter au contrat</Card.Header>
+                    <Card.Body>
+                      <Card.Title>Ajouter un mandat</Card.Title>
+                      <Card.Text>
+                        Veuillez saisir le type de mandat
+                        </Card.Text>
+                        
+      
+      <br></br>
+
+                      <Form>
+                        <Form.Control type="text" size="sm" id="mandatType" placeholder="Type de mandat" onChange={adresse => this.setState({mandatType: adresse.target.value})} />{' '}
+                        <br></br>
+                        
+                      <br></br>
+
+                      <Button variant="secondary" size="sm" onClick={() => this.closeModal2()}>Annuler</Button>{' '}
+                      <Button variant="outline-danger" size="sm" onClick={() => this.addMand(mandatType)} >Enregistrer dans la blockchain</Button>
+                      </Form>
+                    </Card.Body>
+              </Card>
+                </Modal>
 
       </Card.Body>
     </Accordion.Collapse>
