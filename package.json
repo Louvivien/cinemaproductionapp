@@ -1,7 +1,7 @@
 {
-  "name": "client",
+  "name": "production",
   "version": "0.1.0",
-  "private": true,
+  "main": "truffle.js",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "react": "16.11.0",
@@ -10,8 +10,7 @@
     "react-dom": "16.11.0",
     "react-scripts": "3.2.0",
     "web3": "1.2.2",
-    "truffle-hdwallet-provider": "^1.0.0-web3one.5",
-
+    "truffle-hdwallet-provider": "^1.0.0-web3one.5"
   },
   "scripts": {
     "start": "react-scripts start",
