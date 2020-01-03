@@ -1,68 +1,63 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Projet final: plateforme blockchain de gestion des droits cinématographiques
 
-## Available Scripts
+L'application vise à gérer les droits cinématographiques et les relations contractuelles et financières entre les différents parties prenantes d'un film
 
-In the project directory, you can run:
+![](https://srushtivfx.com/wp-content/uploads/2018/08/Evoution-of-Film-industry-Srushti-VFX.png)
 
-### `yarn start`
+# Fonctionnalités
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+-   Il est possible d'ajouter plusieurs co-producteurs au contrat
+- il est possible d'ajouter un type de recette dans la section mandat
+- L'application affiche les co-producteurs du projet
+- L'application affiche les types de recette
+    
 
-### `yarn test`
+## Fonctionnalités supplémentaires (en cours de développement)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+- Mise en place de tests sous truffle sur les fonctionnalités existantes
+- Déploiement sur Heroku
+- Il est possible d'ajouter des recettes au projet
+- Il est possible de lier le contrat à un projet global
+- En fonction des recettes saisies, l'application calcul le montant à verser aux parties prenantes du projet
+- Il est possible d'accéder à un décompte des recettes
+- il est possible d'imprimer le décompte des recettes
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Deploiement en local
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-  `git clone` le repository
+-  cd filmproductionapp
+-  Installer et lancer `ganache,` l'application est configurée sur le port 7545 qui correspond au port par défaut de ganache en version interface graphique
+-   `npm install` dans le dossier cloné
+-   `truffle migrate` pour compiler les smartcontract
+- `npm run dev` pour lancer le server
+- http://localhost:3000 pour voir l'application
+- configurer `Metamask` en mode custom RPC avec comme RPC URL http://127.0.0.1:7545 afin de se connecter à réseau Ganache
 
-### `yarn eject`
+## Deploiement sur Heroku 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-  `git clone` le repository
+-  cd filmproductionapp
+- truffle compile
+- Configure settings variables to rinkeby in truffle-config.js file:
+    var infura_apikey = "you need to register in Infura for an Access Token.";
+    var mnemonic = "< twelve words you can find in metamask/settings/reveal seed words >";
+    var address = "rinkeby address with ether";
+- truffle migrate --reset --network rinkeby
+Note: If you receive an error Error: Exceeds block gas limit, you may need to manually set the gas limit for your contract. See the Truffle Configuration documentation for details.
+- git push heroku master
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+http://filmproductiondapp.herokuapp.com/
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Projet
 
-## Learn More
+| Nom | Lien Github | 
+|:------------:|:-------------:|  
+Vivien Richaud | [https://github.com/Louvivien/](https://github.com/Louvivien/) | 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
