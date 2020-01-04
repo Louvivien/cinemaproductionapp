@@ -24,6 +24,7 @@ class App extends Component {
         contratProduction: '',
         visible : false,
         visible2 : false,
+        visible3 : false,
         producersCount: 0,
         producers: [],
         producerName: '', 
@@ -31,6 +32,9 @@ class App extends Component {
         mandatsCount: 0,
         mandats: [],
         mandatType: '',
+        revenuesCount: 0,
+        revenues: [],
+        amountRevenues: '',
         loading: true,
         text: '', inputText: '', mode:'nothing',
       }
@@ -86,13 +90,26 @@ class App extends Component {
           //on charge les infos mandat
           const mandatsCount = await _contratProduction.methods.mandatsCount().call()
           this.setState({ mandatsCount })
-              // Load producers
+              // Load mandats
               for (var i = 1; i <= mandatsCount; i++) {
                 const mandat = await _contratProduction.methods.mandats(i).call()
                 this.setState({
                   mandats: [...this.state.mandats, mandat]
                 })
+              
               }
+
+              //on charge les infos revenue
+          const revenuesCount = await _contratProduction.methods.mandatsCount().call()
+          this.setState({ revenuesCount })
+              // Load revenues
+              for (var i = 1; i <= revenuesCount; i++) {
+                const revenue = await _contratProduction.methods.revenues(i).call()
+                this.setState({
+                  revenues: [...this.state.revenues, revenue]
+                })
+                }
+
 
           this.setState({ loading: false})
           } else {
@@ -128,11 +145,23 @@ class App extends Component {
           });
       }
 
+      openModal3() {
+        this.setState({
+            visible3 : true
+        });
+    }
+
+    closeModal3() {
+        this.setState({
+            visible3 : false
+        });
+    }
+
         
 
   
 
-  //premiere fonction add producer
+  //premiere fonction du contrat add producer
   async addProd(producerName, producerShare) {
     this.setState({ loading: true })
 
@@ -143,7 +172,7 @@ class App extends Component {
      this.closeModal();
     };
 
-     //deuxieme fonctionadd mandat
+     //deuxieme fonction du contrat add mandat
      async addMand(mandatType) {
       this.setState({ loading: true })
   
@@ -154,9 +183,21 @@ class App extends Component {
        this.closeModal2();
       };
 
+      //troisieme fonction du contrat
+     async addRev(amountRevenue) {
+      this.setState({ loading: true })
+  
+      const {account, web3, contratProduction} = this.state
+      const contract = new web3.eth.Contract(jsonProduction.abi, contratProduction)
+       await contract.methods.addRevenue(amountRevenue).send({from: account})
+       this.setState({ loading: false })
+       this.closeModal3();
+      };
+
 
   render() {
-    const { producerName, producerShare, mandatType } = this.state
+    //definir ici chaque variables des formulaires
+    const { producerName, producerShare, mandatType, amountRevenue } = this.state
     return (
       <div className="App">
          
@@ -182,7 +223,10 @@ class App extends Component {
   <p>Veuillez saisir les informations du contrat</p>
   {/* 
   --Accordion by React bootstrap https://react-bootstrap.github.io/getting-started/introduction
+  
   */}
+  
+
   
   <Accordion>
   <Card>
@@ -261,11 +305,15 @@ class App extends Component {
                     </Card.Body>
               </Card>
                 </Modal>
-
-
       </Card.Body>
     </Accordion.Collapse>
   </Card>
+
+{/* 
+  --Accordion mandats
+  
+  */}
+
   <Card>
     <Accordion.Toggle as={Card.Header} eventKey="1">
       Mandats
@@ -349,12 +397,109 @@ class App extends Component {
     </Accordion.Collapse>
   </Card>
 </Accordion>
+
+
   
 <br></br>
  <br></br>
-    
-    
- <p>Mauris porta odio augue. Nam turpis dui, volutpat id feugiat vitae, sagittis a justo. Nam iaculis aliquet erat non varius. Suspendisse justo arcu, tincidunt sed auctor sit amet, fermentum id turpis. Suspendisse sed enim quis lorem vestibulum fermentum a ut nulla.</p>
+
+
+ <div>
+  <Button id="dollars" variant="primary" size="sm"  value="Open" onClick={() => this.openModal3()}  block>
+    Ajouter une recette
+  </Button>
+  <Modal visible={this.state.visible3} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal3()}>
+              <Card>
+                    <Card.Header as="h5">Ajouter au contrat</Card.Header>
+                    <Card.Body>
+                      <Card.Title>Ajouter une recette</Card.Title>
+                      <Card.Text>
+                        Veuillez saisir la recette
+                        </Card.Text>
+                        
+      
+      <br></br>
+
+                      <Form>
+                        <Form.Control type="number" size="sm" id="amountRevenue" placeholder="Montant de la recette en euros" onChange={adresse => this.setState({amountRevenue: adresse.target.value})} />{' '}
+                        <br></br>
+                        
+                      <br></br>
+
+                      <Button variant="secondary" size="sm" onClick={() => this.closeModal3()}>Annuler</Button>{' '}
+                      <Button variant="outline-danger" size="sm" onClick={() => this.addRev(amountRevenue)} >Enregistrer dans la blockchain</Button>
+                      </Form>
+                    </Card.Body>
+              </Card>
+                </Modal>
+
+
+</div>
+      
+<br></br>
+
+
+ <Accordion>
+  <Card>
+    <Accordion.Toggle as={Card.Header} eventKey="0">
+      Décompte des recettes
+    </Accordion.Toggle>
+    <Accordion.Collapse eventKey="0">
+      <Card.Body>
+      <div>
+            {(() => {
+              if (this.state.revenuesCount == 0) {
+                return (
+                  <div><table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Montant</th>
+                    </tr>
+                  </thead>
+                
+                </table>il n'y a pas de recette pour l’instant</div>
+                )
+              } else {
+                return (
+                  <div><table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Montant</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      { this.state.revenues.map((revenue, key) => {
+                            return(
+                              <tr key={key}>
+                                <th scope="row">{revenue.id.toString()}</th>
+                                <td>{revenue.amountRevenue}€
+</td>
+                                </tr>
+                            )
+                          })}
+        
+                  </tbody>
+                </table></div>
+                )
+              }
+            })()}
+    </div>
+             
+
+      <br></br>
+      <br></br>
+      </Card.Body>
+    </Accordion.Collapse>
+  </Card>
+  </Accordion>
+
+  <br></br>
+ <br></br>
+   
+ <p>Les informations inscrites dans ce contrat sont enregistrées cryptographiquement dans la blockchain. Selon la configuration, elle peuvent être enregistrées dans une blockchain publique comme le réseau mainet Ethereum, sur un réseau public non perpétuel comme le réseau Ethereum testnet Rinkeby, sur un réseau privé hébergé en propre ou sur un réseau Ethereum privé hébergé par un service cloud comme Amazon Web Services ou Microsoft Azure.</p>
+
   <p>Nullam tincidunt elit quis nibh blandit interdum. Duis ullamcorper pellentesque pretium. Nulla facilisi. Morbi semper nisi et justo varius non fermentum metus ornare. Proin vehicula, mi vel volutpat accumsan, libero lacus euismod massa, id feugiat velit enim nec ligula. Aliquam ipsum est, volutpat aliquam tincidunt id, sagittis et velit. Nunc vitae massa vel dui facilisis consectetur vel id sem.</p>
 
 

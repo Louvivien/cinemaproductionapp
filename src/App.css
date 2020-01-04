@@ -3,6 +3,16 @@ body {
 	font: 14px sans-serif;
 	padding: 20px;
   }
+
+  #dollars {
+	background: #85bb65;
+	border: none;
+	
+  }
+
+  
+
+
   .letter {
 	background: #fff;
 	box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -40,7 +50,7 @@ body {
 	width: 65%;
 	height: 30px;
 	border-radius: 10px;
-  text-align: center;
+  	text-align: center;
 	background: url("http://www.atsu.edu/stlclinic/images/progress-bar-bg.jpg") repeat;
 	-moz-box-shadow:    inset 0 0 10px #ccc;
 	-webkit-box-shadow: inset 0 0 10px #ccc;
