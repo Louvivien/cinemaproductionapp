@@ -100,7 +100,7 @@ class App extends Component {
               }
 
               //on charge les infos revenue
-          const revenuesCount = await _contratProduction.methods.mandatsCount().call()
+          const revenuesCount = await _contratProduction.methods.revenuesCount().call()
           this.setState({ revenuesCount })
               // Load revenues
               for (var i = 1; i <= revenuesCount; i++) {
@@ -404,6 +404,7 @@ class App extends Component {
  <br></br>
 
 
+
  <div>
   <Button id="dollars" variant="primary" size="sm"  value="Open" onClick={() => this.openModal3()}  block>
     Ajouter une recette
@@ -437,7 +438,10 @@ class App extends Component {
 </div>
       
 <br></br>
-
+{/* 
+  --Accordion revenues
+  
+  */}
 
  <Accordion>
   <Card>
@@ -448,7 +452,7 @@ class App extends Component {
       <Card.Body>
       <div>
             {(() => {
-              if (this.state.revenuesCount == 0) {
+              if (this.state.revenuesCount === 0) {
                 return (
                   <div><table className="table">
                   <thead>
@@ -474,7 +478,7 @@ class App extends Component {
                             return(
                               <tr key={key}>
                                 <th scope="row">{revenue.id.toString()}</th>
-                                <td>{revenue.amountRevenue}€
+                                <td>{revenue.revenueAmount}€
 </td>
                                 </tr>
                             )
