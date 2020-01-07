@@ -11,17 +11,18 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - il est possible d'ajouter un type de recette dans la section mandat
 - L'application affiche les co-producteurs du projet
 - L'application affiche les types de recette
+- L'application permet d'ajouter des recettes au projet
+- Il est possible d'accéder à un décompte des recettes
+
+
     
 
 ## Fonctionnalités supplémentaires (en cours de développement)
 
 
 - Mise en place de tests sous truffle sur les fonctionnalités existantes
-- Déploiement sur Heroku
-- Il est possible d'ajouter des recettes au projet
 - Il est possible de lier le contrat à un projet global
 - En fonction des recettes saisies, l'application calcul le montant à verser aux parties prenantes du projet
-- Il est possible d'accéder à un décompte des recettes
 - il est possible d'imprimer le décompte des recettes
 
 
