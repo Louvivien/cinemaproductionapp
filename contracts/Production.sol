@@ -2,6 +2,11 @@ pragma solidity ^0.5.12;
 
 contract Production {
 
+string public name;
+
+
+
+
     // Model a Producer
     struct Producer {
         uint id;
@@ -32,7 +37,10 @@ contract Production {
     uint public producersCount;
     //addedProducer event
     event addedProducerEvent (
-        uint indexed producersCount
+        uint id,
+        string name,
+        uint producerShare,
+        address owner
     );
 
     // Store Mandats
@@ -58,6 +66,8 @@ contract Production {
 
 
     constructor () public {
+        name = "Dapp Production";
+
         //addProducer("Steven Spielberg", 50);
         //addProducer("Producteur 2", 50);
         //addMandat("Droits TV")
@@ -65,12 +75,25 @@ contract Production {
     }
 
     function addProducer (string memory _name, uint _producerShare) public {
+          // Require a valid name
+        require(bytes(_name).length > 0);
+        // Require a valid producerShare
+        require(_producerShare > 0);
         producersCount ++;
         producers[producersCount] = Producer(producersCount, _name, _producerShare);
         //trigger voted event
-        emit addedProducerEvent(producersCount);
+        emit addedProducerEvent(producersCount, _name, _producerShare, msg.sender);
+
 
     }
+
+    function getProducer(uint producerID) public view
+    returns (uint, string memory, uint) {
+
+        Producer storage producer = producers[producerID];
+        return (producer.id, producer.name, producer.producerShare);
+    }
+
 
     function addMandat (string memory _mandatType) public {
         mandatsCount ++;
