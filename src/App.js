@@ -8,7 +8,6 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-awesome-modal';
 
 
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
@@ -157,8 +156,24 @@ class App extends Component {
         });
     }
 
-        
-
+  
+    printFunc() {
+    var divToPrint = document.getElementById('printarea');
+    var htmlToPrint = '' +
+        '<style type="text/css">' +
+        'table th, table td {' +
+        'border:1px solid #000;' +
+        'padding;0.5em;' +
+        '}' +
+        '</style>';
+    htmlToPrint += divToPrint.outerHTML;
+    var newWin = window.open("");
+    newWin.document.write("<h3 align='center'>Liste des recettes</h3>");
+    newWin.document.write(htmlToPrint);
+    newWin.print();
+    newWin.close();
+    }
+  
   
 
   //premiere fonction du contrat add producer
@@ -196,11 +211,11 @@ class App extends Component {
 
 
   render() {
+
     //definir ici chaque variables des formulaires
     const { producerName, producerShare, mandatType, amountRevenue } = this.state
     return (
       <div className="App">
-         
          <div class="letter">
          <p class="h2">Contrat de production</p>
          <h3><small class="text-muted">Saisir et enregistrer dans la blockchain le contrat</small>
@@ -466,27 +481,33 @@ class App extends Component {
                 )
               } else {
                 return (
-                  <div><table className="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Montant</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      { this.state.revenues.map((revenue, key) => {
-                            return(
+                  <div>
+                    <div id="printarea">
+                      <table className="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Montant</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {this.state.revenues.map((revenue, key) => {
+                            return (
                               <tr key={key}>
                                 <th scope="row">{revenue.id.toString()}</th>
-                                <td>{revenue.revenueAmount}€
-</td>
-                                </tr>
-                            )
+                                <td>{revenue.revenueAmount}€</td>
+                              </tr>
+                            );
                           })}
-        
-                  </tbody>
-                </table></div>
-                )
+                        </tbody>
+                      </table>
+                    </div>
+                    <Button variant="secondary" size="sm"        onClick={() => this.printFunc()}
+                    >
+                      Imprimer
+                    </Button>
+                  </div>
+                );
               }
             })()}
     </div>
