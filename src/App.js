@@ -218,7 +218,7 @@ class App extends Component {
       <div className="App">
          <div class="letter">
          <p class="h2">Contrat de production</p>
-         <h3><small class="text-muted">Saisir et enregistrer dans la blockchain le contrat</small>
+         <h3><small class="text-muted">Saisir et enregistrer dans la blockchain le contrat et les recettes du film</small>
 </h3>
 <br></br>
 

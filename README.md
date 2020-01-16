@@ -27,6 +27,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - Installer et lancer `ganache,` l'application est configurée sur le port 7545 qui correspond au port par défaut de ganache en version interface graphique
 - `npm install` dans le dossier cloné
 - `truffle migrate` pour compiler les smartcontract
+- `npm run dev` pour lancer les tests
 - `npm run dev` pour lancer le server
 - http://localhost:3000 pour voir l'application
 - configurer `Metamask` en mode custom RPC avec comme RPC URL http://127.0.0.1:7545 afin de se connecter à réseau Ganache
