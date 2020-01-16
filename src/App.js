@@ -525,10 +525,10 @@ class App extends Component {
    
  <p>Les informations inscrites dans ce contrat sont enregistrées cryptographiquement dans la blockchain. Selon la configuration, elle peuvent être enregistrées dans une blockchain publique comme le réseau mainet Ethereum, sur un réseau public non perpétuel comme le réseau Ethereum testnet Rinkeby, sur un réseau privé hébergé en propre ou sur un réseau Ethereum privé hébergé par un service cloud comme Amazon Web Services ou Microsoft Azure.</p>
 
-  <p>Nullam tincidunt elit quis nibh blandit interdum. Duis ullamcorper pellentesque pretium. Nulla facilisi. Morbi semper nisi et justo varius non fermentum metus ornare. Proin vehicula, mi vel volutpat accumsan, libero lacus euismod massa, id feugiat velit enim nec ligula. Aliquam ipsum est, volutpat aliquam tincidunt id, sagittis et velit. Nunc vitae massa vel dui facilisis consectetur vel id sem.</p>
 
 
-  <p>Aenean pulvinar, lacus ultrices euismod viverra, nulla diam interdum ligula, id mollis mi erat quis lectus. Morbi quis felis ut turpis condimentum dictum porttitor id mauris. Nam non tincidunt mauris. Donec viverra eleifend pharetra. Nulla eu ipsum et elit consectetur rutrum. Integer lorem purus, ultricies ac laoreet quis, feugiat vel dolor. Donec eu turpis neque. Nullam molestie sapien eu nibh semper sed convallis est pretium.</p>
+
+  
 
 </div>
 
