@@ -24,7 +24,7 @@ string public name;
     // Model a Revenue
     struct Revenue {
         uint id;
-        string revenueAmount;
+        uint revenueAmount;
     }
 
 
@@ -56,11 +56,15 @@ string public name;
     // Store Revenues
     // Fetch Revenues
     mapping(uint => Revenue) public revenues;
+    // store Revenues Total
+    uint public revenuesTotal = 0;
+    uint public newRevenuesTotal;
     // Store Revenues Count
-    uint public revenuesCount;
+    uint public revenuesCount = 0;
     //addedRevenue event
     event addedRevenueEvent (
-        uint indexed revenuesCount
+        uint indexed revenuesCount,
+        uint indexed revenuesTotal
     );
 
 
@@ -81,7 +85,7 @@ string public name;
         require(_producerShare > 0);
         producersCount ++;
         producers[producersCount] = Producer(producersCount, _name, _producerShare);
-        //trigger voted event
+        //trigger added producer event
         emit addedProducerEvent(producersCount, _name, _producerShare, msg.sender);
 
 
@@ -98,16 +102,18 @@ string public name;
     function addMandat (string memory _mandatType) public {
         mandatsCount ++;
         mandats[mandatsCount] = Mandat(mandatsCount, _mandatType);
-        //trigger voted event
+        //trigger added mandat event
         emit addedMandatEvent(mandatsCount);
 
     }
 
-    function addRevenue (string memory _revenueAmount) public {
+    function addRevenue (uint _revenueAmount) public {
         revenuesCount ++;
+        newRevenuesTotal = revenuesTotal + _revenueAmount;
+        revenuesTotal = newRevenuesTotal;
         revenues[revenuesCount] = Revenue(revenuesCount, _revenueAmount);
-        //trigger voted event
-        emit addedRevenueEvent(revenuesCount);
+        //trigger added revenue event
+        emit addedRevenueEvent(revenuesCount,revenuesTotal);
 
     }
 

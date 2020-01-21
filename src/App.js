@@ -107,7 +107,9 @@ class App extends Component {
                 this.setState({
                   revenues: [...this.state.revenues, revenue]
                 })
-                }
+              }
+            const revenuesTotal = await _contratProduction.methods.revenuesTotal().call()
+            this.setState({ revenuesTotal })
 
 
           this.setState({ loading: false})
@@ -155,6 +157,21 @@ class App extends Component {
             visible3 : false
         });
     }
+
+    //fonction pour les onglets revenues
+
+    openCity(cityName) {
+      var i;
+      var x = document.getElementsByClassName("city");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      document.getElementById(cityName).style.display = "block";
+      }
+
+
+
+    //fonction pour imprimer le decompte
 
   
     printFunc() {
@@ -213,7 +230,7 @@ class App extends Component {
   render() {
 
     //definir ici chaque variables des formulaires
-    const { producerName, producerShare, mandatType, amountRevenue } = this.state
+    const { producerName, producerShare, mandatType, amountRevenue, revenuesTotal } = this.state
     return (
       <div className="App">
          <div class="letter">
@@ -224,7 +241,7 @@ class App extends Component {
 
 <div class="progress-bg">
     	<div class="progress-bar">
-        	<h3 class="raised">5000€
+              <h3 class="raised">{revenuesTotal}€
 &nbsp;recettes </h3>
         </div>
         	
@@ -453,10 +470,7 @@ class App extends Component {
 </div>
       
 <br></br>
-{/* 
-  --Accordion revenues
-  
-  */}
+{/* --Accordion revenues */}
 
  <Accordion>
   <Card>
@@ -465,7 +479,21 @@ class App extends Component {
     </Accordion.Toggle>
     <Accordion.Collapse eventKey="0">
       <Card.Body>
-      <div>
+      
+       {/*--Tab bar revenues */}     
+
+       <div class="w3-bar w3-black">
+          <button class="w3-bar-item w3-button" onClick={() => this.openCity('London')}>Historique</button>
+          
+          <button class="w3-bar-item w3-button" onClick={() => this.openCity('Paris')}>Répartition</button>
+          </div>     
+
+                  <br></br>
+                  <br></br>
+                  
+        {/*--First tab revenues */}
+      
+        <div id="London" class="w3-container city">
             {(() => {
               if (this.state.revenuesCount === 0) {
                 return (
@@ -511,6 +539,57 @@ class App extends Component {
               }
             })()}
     </div>
+
+                  {/*--Second tab revenues */}
+
+                  <div id="Paris" class="w3-container city" style={{ display: 'none' }}>
+                    <p>Le nombre total des recettes est de :</p>
+                    <p>{revenuesTotal} €</p>
+                      
+
+                  <div>
+                    {(() => {
+                      if (this.state.producersCount == 0) {
+                        return (
+                          <div><table className="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Montant</th>
+                              </tr>
+                            </thead>
+
+                          </table>il n'y a pas de producteur pour l'instant</div>
+                        )
+                      } else {
+                        return (
+                          <div><table className="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Montant</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {this.state.producers.map((producer, key) => {
+                                return (
+                                  <tr key={key}>
+                                    <th scope="row">{producer.id.toString()}</th>
+                                    <td>{producer.name}</td>
+                                    <td>{producer.producerShare / 100 * revenuesTotal}€</td>
+                                  </tr>
+                                )
+                              })}
+
+                            </tbody>
+                          </table></div>
+                        )
+                      }
+                    })()}
+                  </div>
+                  </div> {/*--fin Second tab revenues */}
              
 
       <br></br>
