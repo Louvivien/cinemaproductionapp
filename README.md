@@ -29,7 +29,6 @@ L'application vise à gérer les droits cinématographiques et les relations con
 <img src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg">
 </p>
 
-
 ## Documentation relative aux fonctions du smartcontract
 
 [Lien vers la documentation](https://github.com/Louvivien/cinemaproductionapp/blob/master/contracts/Production.doc.md)
@@ -46,14 +45,14 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 - `git clone git@github.com:Louvivien/cinemaproductionapp.git` pour télécharger le repertoire sous Linux ou Mac
 - `cd filmproductionapp`pour aller dans le dossier
-- Installer et lancer `ganache,` l'application est configurée sur le port 7545 qui correspond au port par défaut de ganache en version interface graphique
+- Installer et lancer `ganache,` l'application est configurée sur le port 7545, port par défaut en version interface graphique
 - `npm install` dans le dossier cloné
 - `truffle compile` pour compiler les smartcontracts
 - `truffle migrate` pour déployer les smartcontracts sur le réseau Ganache
 - `truffle test --network ganache` pour lancer les tests
 - `npm run start` pour lancer le server
 - [http://localhost:3000](http://localhost:3000) pour accéder a l'application sur votre navigateur
-- Configurer `Metamask` en mode custom RPC avec comme RPC URL http://127.0.0.1:7545 afin de se connecter à réseau Ganache
+- Configurer `Metamask` en mode custom RPC avec comme RPC URL http://127.0.0.1:7545 afin de se connecter au réseau Ganache
 
 ## Deploiement sur Heroku
 
