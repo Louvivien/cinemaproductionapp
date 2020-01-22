@@ -17,7 +17,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 ## Documentation relatives aux fonctions du smartcontract
 
-[Lien vers la documentation](https://github.com/Louvivien/cinemaproductionapp/contracts/Production.doc.md)
+[Lien vers la documentation](https://github.com/Louvivien/cinemaproductionapp/blob/master/contracts/Production.doc.md)
 
 ## Fonctionnalités supplémentaires (en cours de développement)
 
