@@ -17,9 +17,10 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 ## Fonctionnalités supplémentaires (en cours de développement)
 
-- Amélioration graphique de la barre de progression
-- Amélioration graphique du décompte des recettes
-- Amélioration graphique de la page d'impression
+- Optimisation graphique de la barre de progression
+- Optimisation graphique du décompte des recettes
+- Optimisation graphique de la page d'impression
+- Optimisation sous [https://play.google.com/store/apps/details?id=io.metamask&hl=en](Metamask Mobile) et MAJ Readme
 - Mise en place de tests avancés sous truffle sur les fonctionnalités existantes
 - Il est possible de lier le contrat à un projet global
 
