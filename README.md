@@ -33,7 +33,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - Mise en place de tests avancés sous truffle sur les fonctionnalités existantes
 - Il est possible de lier le contrat à un projet global
 
-## Deploiement en local
+## Déploiement en local
 
 - `git clone git@github.com:Louvivien/cinemaproductionapp.git` pour télécharger le repertoire sous Linux ou Mac
 - `cd filmproductionapp`pour aller dans le dossier
@@ -46,7 +46,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - [http://localhost:3000](http://localhost:3000) pour accéder a l'application sur votre navigateur
 - Configurer `Metamask` en mode custom RPC avec comme RPC URL http://127.0.0.1:7545 afin de se connecter au réseau Ganache
 
-## Deploiement sur Heroku
+## Déploiement sur Heroku
 
 - `git clone git@github.com:Louvivien/cinemaproductionapp.git` pour télécharger le repertoire sous Linux ou Mac
 - `cd filmproductionapp` pour aller dans le dossier
