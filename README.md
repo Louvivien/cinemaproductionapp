@@ -1,3 +1,14 @@
+
+<style type="text/css">
+.image-left {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  float: right;
+}
+</style>
+
+
 # Projet final: plateforme blockchain de gestion des droits cinématographiques
 
 L'application vise à gérer les droits cinématographiques et les relations contractuelles et financières entre les différents parties prenantes d'un film
@@ -7,13 +18,16 @@ L'application vise à gérer les droits cinématographiques et les relations con
 # Fonctionnalités
 
 - Il est possible d'ajouter plusieurs co-producteurs au contrat
-- il est possible d'ajouter un type de recette dans la section mandat
+- Il est possible d'ajouter un type de recette dans la section mandat
 - L'application affiche les co-producteurs du projet
 - L'application affiche les types de recette
 - L'application permet d'ajouter des recettes au projet
 - Il est possible d'accéder à un décompte des recettes
-- il est possible d'imprimer le décompte des recettes
+- Il est possible d'imprimer le décompte des recettes
 - En fonction des recettes saisies, l'application calcule le montant à verser aux parties prenantes du projet
+- Il est possible d'utiliser l'application sur un navigateur mobile blockchain tel que [Metamask Mobile](https://play.google.com/store/apps/details?id=io.metamask&hl=en) 
+![](https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg){: .image-left } 
+
 
 ## Documentation relative aux fonctions du smartcontract
 
@@ -24,7 +38,6 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - Optimisation graphique de la barre de progression
 - Optimisation graphique du décompte des recettes
 - Optimisation graphique de la page d'impression
-- Optimisation sous [Metamask Mobile](https://play.google.com/store/apps/details?id=io.metamask&hl=en) et MAJ Readme
 - Mise en place de tests avancés sous truffle sur les fonctionnalités existantes
 - Il est possible de lier le contrat à un projet global
 
