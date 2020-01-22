@@ -293,3 +293,35 @@ body .progress-bg div {
   display: table;
   clear: both;
 }
+
+/* CSS pour les navigateurs mobiles+ */
+@media all and (min-width: 0px) and (max-width: 480px) {
+  body {
+    padding: 0px;
+  }
+
+  .progress-bg h3.raised {
+    color: #fff;
+    margin: 3px 25px 0 50px;
+    padding: 0 25px 0 0;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: inline;
+  }
+
+  .progress-bg h3.goal,
+  .progress-bg h3.raised {
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 0px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: inline;
+  }
+}
