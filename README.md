@@ -4,7 +4,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 ![](https://srushtivfx.com/wp-content/uploads/2018/08/Evoution-of-Film-industry-Srushti-VFX.png)
 
-# Fonctionnalités
+## Fonctionnalités
 
 - Il est possible d'ajouter plusieurs co-producteurs au contrat
 - il est possible d'ajouter un type de recette dans la section mandat
@@ -14,6 +14,10 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - Il est possible d'accéder à un décompte des recettes
 - il est possible d'imprimer le décompte des recettes
 - En fonction des recettes saisies, l'application calcule le montant à verser aux parties prenantes du projet
+
+### Documentation relatives aux fonctions du smartcontract
+
+[Lien vers la documentation](https://github.com/Louvivien/cinemaproductionapp/contracts/Prodution.doc.md)
 
 ## Fonctionnalités supplémentaires (en cours de développement)
 
@@ -57,7 +61,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - `git push heroku master` pour déployer l'application sur Heroku
   `
 
-### Démo
+## Démo
 
 [Lien vers l'application déployée sur Heroku](https://cinemaproductionapp.herokuapp.com/)
 
