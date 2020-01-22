@@ -60,10 +60,10 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - `cd filmproductionapp` pour aller dans le dossier
 - `truffle compile`
 - Vous devez saisir 3 paramétrages [Infura](https://infura.io/dashboard) afin d'accéder au réseau Rinkeby dans le fichier truffle-config.js :
-  1. var infura_apikey = "VOTRE CLEE D'ACCEES INFURA";
-  2. var mnemonic = "DOUZE MOTS QUE VOUS TROUVEREZ DANS LES PARAMETRES DE VOTRE WALLET METAMASK";
+  1. var infura_apikey = `VOTRE CLEE D'ACCEES INFURA`;
+  2. var mnemonic = `DOUZE MOTS QUE VOUS TROUVEREZ DANS LES PARAMETRES DE VOTRE WALLET METAMASK`;
      Attention à ne pas communiquer un compte sur Github
-  3. var address = "ADDRESSE ETHEREUM AVEC DES ETHER SUR LE RESEAU RINKEBY";
+  3. var address = `ADRESSE ETHEREUM AVEC DES ETHER SUR LE RESEAU RINKEBY`;
 - `truffle migrate --reset --network rinkeby` pour déployer les smartcontracts sur le réseau Rinkeby
 - vous devez avoir un compte [Heroku](https://heroku.com)
 - `git init` pour initialiser le répertoire git
