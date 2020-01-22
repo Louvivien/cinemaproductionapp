@@ -15,9 +15,8 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 # Fonctionnalités
 
-# <img align="left" src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg">
-
 - Il est possible d'ajouter plusieurs co-producteurs au contrat
+  <img align="left" src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg">
 - Il est possible d'ajouter un type de recette dans la section mandat
 - L'application affiche les co-producteurs du projet
 - L'application affiche les types de recette
