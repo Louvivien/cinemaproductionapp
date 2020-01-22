@@ -25,26 +25,27 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 ## Deploiement en local
 
-- `git clone` le repository
-- cd filmproductionapp
+- ``git clone git@github.com:Louvivien/cinemaproductionapp.git` pour télécharger le repertoire sous Linux ou Mac
+- `cd filmproductionapp`pour aller dans le dossier
 - Installer et lancer `ganache,` l'application est configurée sur le port 7545 qui correspond au port par défaut de ganache en version interface graphique
 - `npm install` dans le dossier cloné
 - `truffle compile` pour compiler les smartcontracts
 - `truffle migrate` pour déployer les smartcontracts sur le réseau Ganache
 - `truffle test --network ganache` pour lancer les tests
 - `npm run start` pour lancer le server
-- http://localhost:3000 pour voir l'application
-- configurer `Metamask` en mode custom RPC avec comme RPC URL http://127.0.0.1:7545 afin de se connecter à réseau Ganache
+- [http://localhost:3000](http://localhost:3000) pour accéder a l'application sur votre navigateur
+- Configurer `Metamask` en mode custom RPC avec comme RPC URL http://127.0.0.1:7545 afin de se connecter à réseau Ganache
 
 ## Deploiement sur Heroku
 
-- `git clone` le repository
+- `git clone git@github.com:Louvivien/cinemaproductionapp.git` pour télécharger le repertoire sous Linux ou Mac
 - `cd filmproductionapp` pour aller dans le dossier
 - `truffle compile`
-- vous devez saisir vos 3 paramatrages [https://infura.io/dashboard](Infura) afin d'accéder au réseau Rinkeby dans le fichier truffle-config.js :
-  1. var infura_apikey = "you need to register in Infura for an Access Token.";
-  2. var mnemonic = "< twelve words you can find in metamask/settings/reveal seed words >";
-  3. var address = "rinkeby address with ether";
+- Vous devez saisir 3 paramétrages [https://infura.io/dashboard](Infura) afin d'accéder au réseau Rinkeby dans le fichier truffle-config.js :
+  1. var infura_apikey = "VOTRE CLEE D'ACCEES INFURA";
+  2. var mnemonic = "DOUZE MOTS QUE VOUS TROUVEREZ DANS LES PARAMETRES DE VOTRE WALLET METAMASK";
+     Attention à ne pas communiquer un compte sur Github
+  3. var address = "ADDRESSE ETHEREUM AVEC DES ETHER SUR LE RESEAU RINKEBY";
 - `truffle migrate --reset --network rinkeby` pour déployer les smartcontracts sur le réseau Rinkeby
 - vous devez avoir un compte [https://heroku.com](Heroku)
 - `git init` pour initialiser le répertoire git
