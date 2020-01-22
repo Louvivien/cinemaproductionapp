@@ -1,7 +1,5 @@
 # Noms et descriptions des fonctions et événements du smartcontract Production.sol
 
-
-
 ## Légende
 
 ### Nom de la fonction
@@ -11,8 +9,6 @@
 | \_argument1 | type |
 
 **Description de la fonction **
-
-
 
 ## Fonctions permettant la saisie d'informations dans la blockchain
 
@@ -43,8 +39,6 @@
 
 **Cette fonction permet d'ajouter un mandat, il est demandé de préciser le type de mandat **
 **Ex: Droits d'exploitation TV **
-
-
 
 ## Fonctions permettant la lecture d'informations de la blockchain
 
@@ -118,8 +112,6 @@ _No parameters_
 
 **Cette fonction retourne la somme totale des recettes **
 
-
-
 ## Evénements du smartcontracts
 
 ### addedProducerEvent - read
@@ -131,7 +123,7 @@ _No parameters_
 | producerShare | uint256 |
 | owner         | address |
 
-**Cet événement est créé lorsqu'un utilisateur ajouter un producteur **
+**Cet événement est créé lorsqu'un utilisateur ajoute un producteur **
 
 ### addedRevenueEvent - read
 
@@ -140,7 +132,7 @@ _No parameters_
 | revenuesCount | uint256 |
 | revenuesTotal | uint256 |
 
-**Cet événement est créé lorsqu'un utilisateur ajouter une recetter **
+**Cet événement est créé lorsqu'un utilisateur ajoute une recette **
 
 ### addedMandatEvent - read
 
@@ -148,4 +140,4 @@ _No parameters_
 | ------------ | ------- | ----------- |
 | mandatsCount | uint256 |
 
-**Cet événement est créé lorsqu'un utilisateur ajouter un mandat **
+**Cet événement est créé lorsqu'un utilisateur ajoute un mandat **
