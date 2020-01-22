@@ -3,7 +3,8 @@ var path = require("path");
 var infura_apikey = "1fc213a037c64e8ca99054d307534c3b";
 var mnemonic =
   "float early electric lazy swarm pluck bean alcohol pelican since chef lava";
-var mnemonic2 = "winter replace oyster about cereal indicate visa join purchase wife news game"
+var mnemonic2 =
+  "winter replace oyster about cereal indicate visa join purchase wife news game";
 var address = "0x20cEE93C127d8F35F54f56e0d28D14219Fe23919";
 
 module.exports = {
@@ -11,9 +12,9 @@ module.exports = {
   // to customize your Truffle configuration!
   contracts_build_directory: path.join(__dirname, "src/contracts"),
   networks: {
-    develop: {
-      provider: () => new HDWalletProvider(mnemonic2, "http://127.0.0.1:7545"),
-
+    ganache: {
+      host: "127.0.0.1",
+      port: "7545",
       network_id: 5777
     },
     rinkeby: {
