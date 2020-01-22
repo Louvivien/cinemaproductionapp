@@ -15,7 +15,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - il est possible d'imprimer le décompte des recettes
 - En fonction des recettes saisies, l'application calcule le montant à verser aux parties prenantes du projet
 
-## Documentation relatives aux fonctions du smartcontract
+## Documentation relative aux fonctions du smartcontract
 
 [Lien vers la documentation](https://github.com/Louvivien/cinemaproductionapp/blob/master/contracts/Production.doc.md)
 
