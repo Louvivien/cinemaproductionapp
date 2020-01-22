@@ -25,7 +25,10 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - En fonction des recettes saisies, l'application calcule le montant à verser aux parties prenantes du projet
 - Il est possible d'utiliser l'application sur un navigateur mobile blockchain tel que [Metamask Mobile](https://play.google.com/store/apps/details?id=io.metamask&hl=en)
 
-<img align="center" src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg">
+<p align="center">
+<img src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg">
+</p>
+
 
 ## Documentation relative aux fonctions du smartcontract
 
