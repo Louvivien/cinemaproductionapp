@@ -1,4 +1,3 @@
-
 <style type="text/css">
 .image-left {
   display: block;
@@ -7,7 +6,6 @@
   float: right;
 }
 </style>
-
 
 # Projet final: plateforme blockchain de gestion des droits cinématographiques
 
@@ -25,9 +23,9 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - Il est possible d'accéder à un décompte des recettes
 - Il est possible d'imprimer le décompte des recettes
 - En fonction des recettes saisies, l'application calcule le montant à verser aux parties prenantes du projet
-- Il est possible d'utiliser l'application sur un navigateur mobile blockchain tel que [Metamask Mobile](https://play.google.com/store/apps/details?id=io.metamask&hl=en) 
-![](https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg){: .image-left } 
+- Il est possible d'utiliser l'application sur un navigateur mobile blockchain tel que [Metamask Mobile](https://play.google.com/store/apps/details?id=io.metamask&hl=en)
 
+# <img align="left" src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg">
 
 ## Documentation relative aux fonctions du smartcontract
 
