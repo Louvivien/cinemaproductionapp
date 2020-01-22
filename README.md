@@ -15,7 +15,8 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 # Fonctionnalités
 
-# <img align="left" src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg"
+# <img align="left" src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg">
+
 - Il est possible d'ajouter plusieurs co-producteurs au contrat
 - Il est possible d'ajouter un type de recette dans la section mandat
 - L'application affiche les co-producteurs du projet
@@ -25,8 +26,6 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - Il est possible d'imprimer le décompte des recettes
 - En fonction des recettes saisies, l'application calcule le montant à verser aux parties prenantes du projet
 - Il est possible d'utiliser l'application sur un navigateur mobile blockchain tel que [Metamask Mobile](https://play.google.com/store/apps/details?id=io.metamask&hl=en)
-
->
 
 ## Documentation relative aux fonctions du smartcontract
 
