@@ -4,7 +4,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 ![](https://srushtivfx.com/wp-content/uploads/2018/08/Evoution-of-Film-industry-Srushti-VFX.png)
 
-## Fonctionnalités
+# Fonctionnalités
 
 - Il est possible d'ajouter plusieurs co-producteurs au contrat
 - il est possible d'ajouter un type de recette dans la section mandat
