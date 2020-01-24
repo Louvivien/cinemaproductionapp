@@ -63,8 +63,10 @@ string public name;
     uint public revenuesCount = 0;
     //addedRevenue event
     event addedRevenueEvent (
-        uint indexed revenuesCount,
-        uint indexed revenuesTotal
+        uint id,
+        uint _revenueAmount,
+        uint revenuesTotal,
+        address owner
     );
 
 
@@ -108,12 +110,14 @@ string public name;
     }
 
     function addRevenue (uint _revenueAmount) public {
+        // Require a valid _revenueAmount
+        require(_revenueAmount > 0);
         revenuesCount ++;
         newRevenuesTotal = revenuesTotal + _revenueAmount;
         revenuesTotal = newRevenuesTotal;
         revenues[revenuesCount] = Revenue(revenuesCount, _revenueAmount);
         //trigger added revenue event
-        emit addedRevenueEvent(revenuesCount,revenuesTotal);
+        emit addedRevenueEvent(revenuesCount, _revenueAmount, revenuesTotal, msg.sender);
 
     }
 

@@ -447,7 +447,7 @@ class App extends Component {
                     <Card.Body>
                       <Card.Title>Ajouter une recette</Card.Title>
                       <Card.Text>
-                        Veuillez saisir la recette
+                        Veuillez saisir la recette (montant en euros)
                         </Card.Text>
                         
       

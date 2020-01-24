@@ -36,21 +36,54 @@ contract("Production", accounts => {
       producersCount = await production.producersCount();
     });
 
-    it("creates producers", async () => {
+    it("it is possible to add producers", async () => {
       // SUCCESS
       assert.equal(producersCount, 1);
       const event = result.logs[0].args;
       assert.equal(
-            assert.equal(event.id.toNumber(), producersCount.toNumber(), 'id is correct'))
-      assert.equal(event.name, "Steven Spielberg", "name is correct")
+        assert.equal(
+          event.id.toNumber(),
+          producersCount.toNumber(),
+          "id is correct"
+        )
+      );
+      assert.equal(event.name, "Steven Spielberg", "name is correct");
       assert.equal(event.producerShare, "12", "producerShare is correct");
 
       // FAILURE: Producer must have a name
-      await await production.addProducer("", 12, { from: accounts[0] }).should
+      await production.addProducer("", 12, { from: accounts[0] }).should.be
+        .rejected;
+      // FAILURE: Producer must have a share
+      await production.addProducer("Brad Pitt", 0, { from: accounts[0] }).should
         .be.rejected;
-      // FAILURE: Producer must have a price
-      await await production.addProducer("iPhone X", 0, { from: accounts[0] })
-        .should.be.rejected;
+    });
+  });
+
+  describe("revenues", async () => {
+    let result, revenuesCount;
+
+    before(async () => {
+      result = await production.addRevenue(100, {
+        from: accounts[0]
+      });
+      revenuesCount = await production.revenuesCount();
+    });
+
+    it("it is possible to add revenues", async () => {
+      // SUCCESS
+      assert.equal(revenuesCount, 1);
+      const event = result.logs[0].args;
+      assert.equal(
+        assert.equal(
+          event.id.toNumber(),
+          revenuesCount.toNumber(),
+          "id is correct"
+        )
+      );
+      assert.equal(event._revenueAmount, 100, "amount is correct");
+
+      // FAILURE: Amount must be specified
+      await production.addRevenue("", { from: accounts[0] }).should.be.rejected;
     });
   });
 });
