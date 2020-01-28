@@ -37,7 +37,6 @@ class App extends Component {
         loading: true,
         text: '', inputText: '', mode:'nothing',
       }
-      //this.addProd = this.addProd.bind(this),
   }
  
         async componentWillMount() { 
@@ -98,7 +97,7 @@ class App extends Component {
               
               }
 
-              //on charge les infos revenue
+              //on charge les infos recette
           const revenuesCount = await _contratProduction.methods.revenuesCount().call()
           this.setState({ revenuesCount })
               // Load revenues
@@ -190,6 +189,24 @@ class App extends Component {
     newWin.print();
     newWin.close();
     }
+
+
+
+    //fonction pour convertir les dates unix 
+
+  toDate(Unixtimestamp) {
+  var timestamp = Unixtimestamp,
+    date = new Date(timestamp * 1000),
+    datevalues = [
+      date.getDate() + '/',
+      date.getMonth() + 1 + '/',
+      date.getFullYear(),   
+      //date.getHours(),
+      //date.getMinutes(),
+      //date.getSeconds(),
+    ];
+    return (datevalues); //=> [2011, 3, 25, 23, 0, 0]
+  }
   
   
 
@@ -515,6 +532,7 @@ class App extends Component {
                         <thead>
                           <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Montant</th>
                           </tr>
                         </thead>
@@ -523,6 +541,7 @@ class App extends Component {
                             return (
                               <tr key={key}>
                                 <th scope="row">{revenue.id.toString()}</th>
+                                <td>{this. toDate(revenue.revenueTimestamp)}</td>
                                 <td>{revenue.revenueAmount}€</td>
                               </tr>
                             );

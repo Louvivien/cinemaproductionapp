@@ -25,6 +25,7 @@ string public name;
     struct Revenue {
         uint id;
         uint revenueAmount;
+        uint revenueTimestamp;
     }
 
 
@@ -66,7 +67,8 @@ string public name;
         uint id,
         uint _revenueAmount,
         uint revenuesTotal,
-        address owner
+        address owner, 
+        uint revenueTimestamp
     );
 
 
@@ -115,9 +117,9 @@ string public name;
         revenuesCount ++;
         newRevenuesTotal = revenuesTotal + _revenueAmount;
         revenuesTotal = newRevenuesTotal;
-        revenues[revenuesCount] = Revenue(revenuesCount, _revenueAmount);
+        revenues[revenuesCount] = Revenue(revenuesCount, _revenueAmount, block.timestamp);
         //trigger added revenue event
-        emit addedRevenueEvent(revenuesCount, _revenueAmount, revenuesTotal, msg.sender);
+        emit addedRevenueEvent(revenuesCount, _revenueAmount, revenuesTotal, msg.sender, block.timestamp);
 
     }
 
