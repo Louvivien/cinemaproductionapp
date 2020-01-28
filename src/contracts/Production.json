@@ -6298,11 +6298,49 @@
           "name": "addedRevenueEvent",
           "type": "event",
           "signature": "0xedd38793d6b7ef1e71ddee8787acaa832dcc0239b475dfa00a8aff1dac0d662b"
+        },
+        "0xd1160c528182b73199ffcc5f84ee4a10acbe4009e701a9f63cc550df5bb97a13": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_revenueAmount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "revenuesTotal",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "revenueTimestamp",
+              "type": "uint256"
+            }
+          ],
+          "name": "addedRevenueEvent",
+          "type": "event",
+          "signature": "0xd1160c528182b73199ffcc5f84ee4a10acbe4009e701a9f63cc550df5bb97a13"
         }
       },
       "links": {},
-      "address": "0x78C489D67A947c80E36602cA9Cea84578F80FF25",
-      "transactionHash": "0xecb4c0a151544e56639047bcb3aa1bb55f8936d910188ed60874f52c419b8a2f"
+      "address": "0xf384B6109A67E947A5898379a271cD4FC067e390",
+      "transactionHash": "0x597f7d448d0e089665c02e33c525363a07a426e20009b51fdc29091adc1f6376"
     },
     "5777": {
       "events": {
@@ -6471,7 +6509,7 @@
     }
   },
   "schemaVersion": "3.0.20",
-  "updatedAt": "2020-01-28T16:22:51.602Z",
+  "updatedAt": "2020-01-28T16:29:44.300Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
