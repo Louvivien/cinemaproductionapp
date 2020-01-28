@@ -6466,12 +6466,12 @@
         }
       },
       "links": {},
-      "address": "0x069AFD7C9344d33b5A1944b6D2e04C8fC4bcC367",
-      "transactionHash": "0x7d18bc61c7d5e4d06a3864c03f9dc6bec942399abafa6ae21fc8be2692475e8d"
+      "address": "0x3A3cd8C8BBEFe9793575263c98bE984bAF10C814",
+      "transactionHash": "0xdb2bc7aca3ecbffe56325777654228b92842ea74556e511c2518a7e5fde2d2d9"
     }
   },
   "schemaVersion": "3.0.20",
-  "updatedAt": "2020-01-24T18:15:04.250Z",
+  "updatedAt": "2020-01-28T16:22:51.602Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
