@@ -6,7 +6,6 @@ string public name;
 
 
 
-
     // Model a Producer
     struct Producer {
         uint id;
@@ -27,6 +26,14 @@ string public name;
         uint revenueAmount;
         uint revenueTimestamp;
     }
+
+    // Model an Article
+    struct Article {
+        uint id;
+        string articleTitle;
+        string articleContent;
+    }
+
 
 
     // Store accounts that have been added
@@ -69,6 +76,19 @@ string public name;
         uint revenuesTotal,
         address owner, 
         uint revenueTimestamp
+    );
+
+    // Store Articles
+    // Fetch Articles
+    mapping(uint => Article) public articles;
+    // Store Article Count
+    uint public articlesCount;
+    //addeArticle event
+    event addedArticleEvent (
+        uint id,
+        string articleName,
+        string articleContent
+
     );
 
 
@@ -122,6 +142,16 @@ string public name;
         emit addedRevenueEvent(revenuesCount, _revenueAmount, revenuesTotal, msg.sender, block.timestamp);
 
     }
+
+    function addArticle (string memory articleTitle, string memory articleContent) public {
+        articlesCount ++;
+        articles[articlesCount] = Article(articlesCount, articleTitle, articleContent);
+        //trigger added article event
+        emit addedArticleEvent(articlesCount, articleTitle, articleContent);
+
+    }
+
+
 
 
 

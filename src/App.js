@@ -23,7 +23,9 @@ class App extends Component {
         contratProduction: '',
         visible : false,
         visible2 : false,
-        visible3 : false,
+        visible3: false,
+        visible4: false,
+        visible5: false,
         producersCount: 0,
         producers: [],
         producerName: '', 
@@ -34,6 +36,10 @@ class App extends Component {
         revenuesCount: 0,
         revenues: [],
         amountRevenues: '',
+        articlesCount: 0,
+        articles: [],
+        articleTitle: '',
+        articleContent: '',
         loading: true,
         text: '', inputText: '', mode:'nothing',
       }
@@ -85,6 +91,17 @@ class App extends Component {
                   producers: [...this.state.producers, producer]
                 })
               }
+            
+            //on charge les infos article
+            const articlesCount = await _contratProduction.methods.articlesCount().call()
+            this.setState({ articlesCount })
+            // Load articles
+            for (var i = 1; i <= articlesCount; i++) {
+              const article = await _contratProduction.methods.articles(i).call()
+              this.setState({
+                articles: [...this.state.articles, article]
+              })
+            }
           //on charge les infos mandat
           const mandatsCount = await _contratProduction.methods.mandatsCount().call()
           this.setState({ mandatsCount })
@@ -115,8 +132,18 @@ class App extends Component {
           } else {
           window.alert('Contract not deployed to detected network.')
           }
-          }
+        }
+  
+  //fonction pour ajouter un article 
 
+  newSection() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
           
 
   //fonctions pour les modals
@@ -155,7 +182,31 @@ class App extends Component {
         this.setState({
             visible3 : false
         });
-    }
+    }      
+
+      openModal4() {
+        this.setState({
+          visible4: true
+        });
+      }
+
+      closeModal4() {
+        this.setState({
+          visible4: false
+        }); 
+      }
+  
+  openModal5() {
+    this.setState({
+      visible5: true
+    });
+  }
+
+  closeModal5() {
+    this.setState({
+      visible5: false
+    });
+  }
 
     //fonction pour les onglets revenues
 
@@ -205,8 +256,12 @@ class App extends Component {
       //date.getMinutes(),
       //date.getSeconds(),
     ];
-    return (datevalues); //=> [2011, 3, 25, 23, 0, 0]
+    return (datevalues); 
   }
+
+
+  
+
   
   
 
@@ -243,11 +298,22 @@ class App extends Component {
        this.closeModal3();
       };
 
+       //quatrieme fonction du contrat
+  async addArt(articleTitle, articleContent) {
+      this.setState({ loading: true })
+  
+      const {account, web3, contratProduction} = this.state
+      const contract = new web3.eth.Contract(jsonProduction.abi, contratProduction)
+    await contract.methods.addArticle(articleTitle, articleContent).send({from: account})
+       this.setState({ loading: false })
+       this.closeModal4();
+      };
+
 
   render() {
 
     //definir ici chaque variables des formulaires
-    const { producerName, producerShare, mandatType, amountRevenue, revenuesTotal } = this.state
+    const { producerName, producerShare, mandatType, amountRevenue, revenuesTotal, articleTitle, articleContent } = this.state
     return (
       <div className="App">
          <div class="letter">
@@ -618,9 +684,97 @@ class App extends Component {
   </Card>
   </Accordion>
 
+
+          <br></br>
+          <br></br>      
+
+          <Button id="dollars" variant="primary" size="sm" value="Open" onClick={() => this.openModal4()} block>
+            Ajouter un article au contrat
+  </Button>
+
+          <Modal visible={this.state.visible4} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal4()}>
+            <Card>
+              <Card.Header as="h5">Ajouter un article au contrat</Card.Header>
+              <Card.Body>
+                <Card.Title>Ajouter un article</Card.Title>
+                <Card.Text>
+                  Veuillez saisir l'intitulé de l'article
+                        </Card.Text>
+
+
+                <br></br>
+
+                <Form>
+                  <Form.Control type="text" size="sm" id="articleTitle" placeholder="Titre de l'article" onChange={adresse => this.setState({ articleTitle: adresse.target.value })} />{' '}
+                  <br></br>
+                  <Form.Control as="textarea" rows="3" size="sm" id="articleContent" placeholder="Contenu de l'article"  onChange={adresse => this.setState({ articleContent: adresse.target.value })} />
+                  <br></br>
+
+                  <br></br>
+
+                  <Button variant="secondary" size="sm" onClick={() => this.closeModal4()}>Annuler</Button>{' '}
+                  <Button variant="outline-danger" size="sm" onClick={() => this.addArt(articleTitle, articleContent)} >Enregistrer dans la blockchain</Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Modal>
+          
+
   <br></br>
  <br></br>
-   
+
+          <div>
+            {(() => {
+              if (this.state.articlesCount == 0) {
+                return (
+                  <div>il n'y a pas d'article pour l'instant</div>
+                )
+              } else {
+                
+                return (
+                  <div>
+                    
+                    
+                   
+                    
+                      {this.state.articles.map((article, key) => {
+                        return (
+                          <div key={key}>
+                            <Accordion>
+                              <Card>
+                                <Accordion.Toggle as={Card.Header} eventKey="0">Article{" "} 
+                              {article.id.toString()}.
+                            </Accordion.Toggle>
+                            <Accordion.Collapse eventKey="0">
+                              <Card.Body>
+
+
+                                    
+                                    <p>{article.articleTitle}</p>
+                                    <p>{article.articleContent}</p>
+
+                                    
+                              </Card.Body>
+                                </Accordion.Collapse>
+                              </Card>
+                            </Accordion>
+                          </div>
+                        )
+                      })}
+
+                    
+                  </div>
+                )
+              }
+            })()}
+          </div>
+          
+
+
+          <br></br>
+          <br></br>
+
+             
  <p>Les informations inscrites dans ce contrat sont enregistrées cryptographiquement dans la blockchain. Selon la configuration, elle peuvent être enregistrées dans une blockchain publique comme le réseau mainet Ethereum, sur un réseau public non perpétuel comme le réseau Ethereum testnet Rinkeby, sur un réseau privé hébergé en propre ou sur un réseau Ethereum privé hébergé par un service cloud comme Amazon Web Services ou Microsoft Azure.</p>
 
 

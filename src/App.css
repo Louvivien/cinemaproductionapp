@@ -9,6 +9,11 @@ body {
   border: none;
 }
 
+.h5,
+h5 {
+  font-size: 0.89rem;
+}
+
 .letter {
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
