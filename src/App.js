@@ -39,6 +39,7 @@ class App extends Component {
         mandats: [],
         mandatType: '',
         revenuesCount: 0,
+        revenuesTotal: 0,
         revenues: [],
         amountRevenues: '',
         articlesCount: 0,
