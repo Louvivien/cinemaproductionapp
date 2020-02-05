@@ -28,8 +28,13 @@ class App extends Component {
         visible5: false,
         producersCount: 0,
         producers: [],
+        listProducers: [],
         producerName: '', 
         producerShare: '',
+        producerAddress: '',
+        haveSigned: [],
+        signatures: [],
+        signaturesCount: 0,
         mandatsCount: 0,
         mandats: [],
         mandatType: '',
@@ -81,6 +86,36 @@ class App extends Component {
           this.setState({
             contratProduction : _contratProduction._address,
           })
+
+
+            //on charge les infos signature
+            const signaturesCount = await _contratProduction.methods.signaturesCount().call()
+            this.setState({ signaturesCount })
+            // Load signatures
+            for (var i = 1; i <= signaturesCount; i++) {
+              const signature = await _contratProduction.methods.signatures(i).call()
+              this.setState({
+                signatures: [...this.state.signatures, signature]
+              })
+
+            }
+
+            //on charge les infos recette
+            const revenuesCount = await _contratProduction.methods.revenuesCount().call()
+            this.setState({ revenuesCount })
+            // Load revenues
+            for (var i = 1; i <= revenuesCount; i++) {
+              const revenue = await _contratProduction.methods.revenues(i).call()
+              this.setState({
+                revenues: [...this.state.revenues, revenue]
+              })
+            }
+            const revenuesTotal = await _contratProduction.methods.revenuesTotal().call()
+            this.setState({ revenuesTotal })
+ 
+
+
+            
           //on charge les infos producer
           const producersCount = await _contratProduction.methods.producersCount().call()
           this.setState({ producersCount })
@@ -114,19 +149,6 @@ class App extends Component {
               
               }
 
-              //on charge les infos recette
-          const revenuesCount = await _contratProduction.methods.revenuesCount().call()
-          this.setState({ revenuesCount })
-              // Load revenues
-              for (var i = 1; i <= revenuesCount; i++) {
-                const revenue = await _contratProduction.methods.revenues(i).call()
-                this.setState({
-                  revenues: [...this.state.revenues, revenue]
-                })
-              }
-            const revenuesTotal = await _contratProduction.methods.revenuesTotal().call()
-            this.setState({ revenuesTotal })
-
 
           this.setState({ loading: false})
           } else {
@@ -134,17 +156,7 @@ class App extends Component {
           }
         }
   
-  //fonction pour ajouter un article 
-
-  newSection() {
-    var x = document.getElementById("myDIV");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
-          
+  
 
   //fonctions pour les modals
 
@@ -243,7 +255,7 @@ class App extends Component {
 
 
 
-    //fonction pour convertir les dates unix 
+    //fonction pour convertir les dates unix des recettes
 
   toDate(Unixtimestamp) {
   var timestamp = Unixtimestamp,
@@ -260,11 +272,23 @@ class App extends Component {
   }
 
 
-  
+  //fonction qui check si l'utilisateur est producteur
+  async isProducer() {
+    const { web3, contratReputation} = this.state
+    const contract = new web3.eth.Contract(jsonProduction.abi, contratReputation)
+    const prod = await contract.methods.isProducer().call()
+    if (prod === true ) {
+      this.setState({
+        prod: true
+      })
+    } else {
+      this.setState({
+        prod: false
+      })
+    }
+  }
 
   
-  
-
   //premiere fonction du contrat add producer
   async addProd(producerName, producerShare) {
     this.setState({ loading: true })
@@ -287,7 +311,7 @@ class App extends Component {
        this.closeModal2();
       };
 
-      //troisieme fonction du contrat
+      //troisieme fonction du contrat pour ajouter une recette
      async addRev(amountRevenue) {
       this.setState({ loading: true })
   
@@ -298,7 +322,7 @@ class App extends Component {
        this.closeModal3();
       };
 
-       //quatrieme fonction du contrat
+       //quatrieme fonction du contrat pour ajouter un article
   async addArt(articleTitle, articleContent) {
       this.setState({ loading: true })
   
@@ -307,28 +331,39 @@ class App extends Component {
     await contract.methods.addArticle(articleTitle, articleContent).send({from: account})
        this.setState({ loading: false })
        this.closeModal4();
-      };
+  };
+  
+  //quatrieme fonction du contrat pour ajouter une signature
+  async sign() {
+    this.setState({ loading: true })
+
+    const { account, web3, contratProduction } = this.state
+    const contract = new web3.eth.Contract(jsonProduction.abi, contratProduction)
+    await contract.methods.sign().send({ from: account })
+    this.setState({ loading: false })
+    this.closeModal5();
+  };
 
 
   render() {
 
     //definir ici chaque variables des formulaires
-    const { producerName, producerShare, mandatType, amountRevenue, revenuesTotal, articleTitle, articleContent } = this.state
+    const { producerName, producerShare, mandatType, prod, amountRevenue, revenuesTotal, articleTitle, articleContent } = this.state
     return (
       <div className="App">
-         <div class="letter">
-         <p class="h2">Contrat de production</p>
-         <h3><small class="text-muted">Saisir et enregistrer dans la blockchain le contrat et les recettes du film</small>
+        <div className="letter">
+          <p className="h2">Contrat de production</p>
+          <h3><small className="text-muted">Saisir et enregistrer dans la blockchain le contrat et les recettes du film</small>
 </h3>
 <br></br>
 
-<div class="progress-bg">
-    	<div class="progress-bar">
-              <h3 class="raised">{revenuesTotal}€
+<div className="progress-bg">
+    	<div className="progress-bar">
+              <h3 className="raised">{revenuesTotal}€
 &nbsp;recettes </h3>
         </div>
         	
-        	<h3 class="goal">Budget: 100000€</h3>
+        	<h3 className="goal">Budget: 100000€</h3>
     </div>
 
 <br></br>
@@ -396,7 +431,26 @@ class App extends Component {
 
       <br></br>
       <br></br>
-      <Button variant="outline-primary" size="sm" value="Open" onClick={() => this.openModal()} >Ajouter un coproducteur</Button>
+       <div>  {/*--on peut modifier le contrat seulement si personne n'a encore signe*/}
+            {(() => {
+              if (this.state.signaturesCount == 0) {
+                return (
+                  <div>
+
+                  <Button variant="outline-primary" size="sm" value="Open" onClick={() => this.openModal()} >Ajouter un coproducteur</Button>
+
+                </div>
+                )
+              } else {
+                return (
+                  <div>
+
+        
+                  </div>
+                )
+              }
+            })()}
+    </div> {/*--fin condition affichage signature*/}
 
       <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal()}>
               <Card>
@@ -481,7 +535,26 @@ class App extends Component {
 
       <br></br>
       <br></br>
-      <Button variant="outline-primary" size="sm" value="Open" onClick={() => this.openModal2()} >Ajouter un mandat</Button>
+                  <div>  {/*--on peut modifier le contrat seulement si personne n'a encore signe*/}
+                    {(() => {
+                      if (this.state.signaturesCount == 0) {
+                        return (
+                          <div>
+
+                            <Button variant="outline-primary" size="sm" value="Open" onClick={() => this.openModal2()} >Ajouter un mandat</Button>
+
+                          </div>
+                        )
+                      } else {
+                        return (
+                          <div>
+
+
+                          </div>
+                        )
+                      }
+                    })()}
+                  </div> {/*--fin condition affichage signature*/}
 
       <Modal visible={this.state.visible2} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal2()}>
               <Card>
@@ -565,10 +638,10 @@ class App extends Component {
       
        {/*--Tab bar revenues */}     
 
-       <div class="w3-bar w3-black">
-          <button class="w3-bar-item w3-button" onClick={() => this.openCity('London')}>Historique</button>
+       <div className="w3-bar w3-black">
+          <button className="w3-bar-item w3-button" onClick={() => this.openCity('London')}>Historique</button>
           
-          <button class="w3-bar-item w3-button" onClick={() => this.openCity('Paris')}>Répartition</button>
+          <button className="w3-bar-item w3-button" onClick={() => this.openCity('Paris')}>Répartition</button>
           </div>     
 
                   <br></br>
@@ -576,7 +649,7 @@ class App extends Component {
                   
         {/*--First tab revenues */}
       
-        <div id="London" class="w3-container city">
+        <div id="London" className="w3-container city">
             {(() => {
               if (this.state.revenuesCount === 0) {
                 return (
@@ -627,7 +700,7 @@ class App extends Component {
 
                   {/*--Second tab revenues */}
 
-                  <div id="Paris" class="w3-container city" style={{ display: 'none' }}>
+                  <div id="Paris" className="w3-container city" style={{ display: 'none' }}>
                     <p>Le nombre total des recettes est de :</p>
                     <p>{revenuesTotal} €</p>
                       
@@ -688,9 +761,29 @@ class App extends Component {
           <br></br>
           <br></br>      
 
-          <Button id="dollars" variant="primary" size="sm" value="Open" onClick={() => this.openModal4()} block>
-            Ajouter un article au contrat
-  </Button>
+          <div>  {/*--on peut modifier le contrat seulement si personne n'a encore signe*/}
+            {(() => {
+              if (this.state.signaturesCount == 0) {
+                return (
+                  <div>
+
+                    <Button variant="outline-secondary" size="sm" value="Open" onClick={() => this.openModal4()} block>
+                      Ajouter un article au contrat
+                  </Button>
+
+                  </div>
+                )
+              } else {
+                return (
+                  <div>
+
+
+                  </div>
+                )
+              }
+            })()}
+          </div> {/*--fin condition affichage signature*/}
+
 
           <Modal visible={this.state.visible4} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal4()}>
             <Card>
@@ -773,6 +866,59 @@ class App extends Component {
 
           <br></br>
           <br></br>
+
+         
+          <div>  {/*--on peut modifier le contrat seulement si personne n'a encore signe*/}
+            {/*--condition a modifier : seulement si on ne l'a pas deja fait et que l'on est un producteur*/}
+            {(() => {
+              if (this.state.signaturesCount == 0) {
+                return (
+                  <div>
+
+                    <Button variant="outline-danger" size="sm" onClick={() => this.openModal5()} >Signer le contrat</Button>
+
+                  </div>
+                )
+              } else {
+                return (
+                  <div>
+
+
+                  </div>
+                )
+              }
+            })()}
+          </div> {/*--fin condition affichage signature*/}
+          
+          <Modal visible={this.state.visible5} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal5()}>
+            <Card>
+              <Card.Header as="h5">Signer le contrat</Card.Header>
+              <Card.Body>
+                <Card.Title>Vous êtes sur le point de signer le contrat </Card.Title>
+                
+                  <div className="alert alert-warning">
+                    <strong>Attention !</strong> une fois le contrat signé, il n'est plus possible d'ajouter des éléments du contrat à l'exception des recettes.
+                    </div>
+                <Card.Text>
+                        </Card.Text>
+
+
+                <br></br>
+
+                <br></br>
+
+                <Button variant="secondary" size="sm" onClick={() => this.closeModal5()}>Annuler</Button>{' '}
+                <Button variant="outline-danger" size="sm" onClick={() => this.sign()} >Signer le contrat</Button>
+
+              </Card.Body>
+            </Card>
+          </Modal>
+
+          <br></br>
+
+          <br></br>
+
+
 
              
  <p>Les informations inscrites dans ce contrat sont enregistrées cryptographiquement dans la blockchain. Selon la configuration, elle peuvent être enregistrées dans une blockchain publique comme le réseau mainet Ethereum, sur un réseau public non perpétuel comme le réseau Ethereum testnet Rinkeby, sur un réseau privé hébergé en propre ou sur un réseau Ethereum privé hébergé par un service cloud comme Amazon Web Services ou Microsoft Azure.</p>

@@ -3,6 +3,7 @@ pragma solidity ^0.5.12;
 contract Production {
 
 string public name;
+bool public oneHasSigned = false;
 
 
 
@@ -11,6 +12,7 @@ string public name;
         uint id;
         string name;
         uint producerShare;
+        address producerAddress;
     }
 
     // Model a Mandat
@@ -32,6 +34,12 @@ string public name;
         uint id;
         string articleTitle;
         string articleContent;
+    }
+
+    // Model a Signature
+    struct Signature {
+        uint id;
+        address owner;
     }
 
 
@@ -83,14 +91,27 @@ string public name;
     mapping(uint => Article) public articles;
     // Store Article Count
     uint public articlesCount;
-    //addeArticle event
+     //addedArticle event
     event addedArticleEvent (
         uint id,
         string articleName,
         string articleContent
 
     );
+    
 
+    // Store accounts that have signed
+    mapping(address => bool) public listSignatures;
+    // Store Signatures
+    // Fetch Signatures
+    mapping(uint => Signature) public signatures;
+    // Store Signatures Count
+    uint public signaturesCount;
+    //addedSignature event
+    event addedSignatureEvent (
+        uint id,
+        address owner
+    );
 
 
     constructor () public {
@@ -108,7 +129,8 @@ string public name;
         // Require a valid producerShare
         require(_producerShare > 0);
         producersCount ++;
-        producers[producersCount] = Producer(producersCount, _name, _producerShare);
+        producers[producersCount] = Producer(producersCount, _name, _producerShare, msg.sender);
+        listProducers[msg.sender] = true;
         //trigger added producer event
         emit addedProducerEvent(producersCount, _name, _producerShare, msg.sender);
 
@@ -116,10 +138,10 @@ string public name;
     }
 
     function getProducer(uint producerID) public view
-    returns (uint, string memory, uint) {
+    returns (uint, string memory, uint, address) {
 
         Producer storage producer = producers[producerID];
-        return (producer.id, producer.name, producer.producerShare);
+        return (producer.id, producer.name, producer.producerShare, producer.producerAddress);
     }
 
 
@@ -151,8 +173,36 @@ string public name;
 
     }
 
+    //Fonction qui vérifie qu'un utilisateur est un producteur
+    function isProducer() public view returns(bool) {
+        if (listProducers[msg.sender] == true) {
+        return true;
+        } else {
+            return false;
+        }
+    }
+
+    
+    
+    //Fonction qui vérifie qu'un utilisateur a signe
+    function hasSigned(address user) public view returns(bool) {
+        if (listSignatures[user] == true) {
+        return true;
+        } else {
+            return false;
+        }
+    }
 
 
+     function sign () public {
+        require(listProducers[msg.sender] = true);
+        signaturesCount ++;
+        oneHasSigned = true;
+        signatures[signaturesCount] = Signature(signaturesCount, msg.sender);
+        listSignatures[msg.sender] = true;
+        
+        //trigger added article event
+        emit addedSignatureEvent(signaturesCount, msg.sender);
 
-
+     }
 }

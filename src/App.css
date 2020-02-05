@@ -53,8 +53,6 @@ h5 {
   height: 30px;
   border-radius: 10px;
   text-align: center;
-  background: url("http://www.atsu.edu/stlclinic/images/progress-bar-bg.jpg")
-    repeat;
   -moz-box-shadow: inset 0 0 10px #ccc;
   -webkit-box-shadow: inset 0 0 10px #ccc;
   box-shadow: inset 0 0 10px #ccc;
