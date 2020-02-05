@@ -16,6 +16,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - En fonction des recettes saisies, l'application calcule le montant à verser aux parties prenantes du projet
 - Il est possible d'utiliser l'application sur un navigateur mobile blockchain tel que [Metamask Mobile](https://play.google.com/store/apps/details?id=io.metamask&hl=en)
 - il est possible d'ajouter des articles au contrat
+- il est possible de signer le contrat
 
 <p align="center">
 <img src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg">
@@ -34,6 +35,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - Optimisation graphique de la page d'impression
 - Mise en place de tests avancés sous truffle sur les fonctionnalités existantes
 - Verifier que tous les controles React sont aussi mis en place au niveau du smartcontract
+- Mettre en place un loader
 - Il est possible de lier le contrat à un projet global
 
 ## Déploiement en local
