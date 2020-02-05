@@ -30,13 +30,14 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 - Les producteurs peuvent signer le contrat ce qui empeche toutes modifications a part la saisie des recettes
 - Les informations sont enregistrees sous forme de hash
-- Optimisation graphique de la barre de progression
-- Optimisation graphique du décompte des recettes
-- Optimisation graphique de la page d'impression
+- Afficher les liens vers les transactions Rinkeby
 - Mise en place de tests avancés sous truffle sur les fonctionnalités existantes
 - Verifier que tous les controles React sont aussi mis en place au niveau du smartcontract
 - Mettre en place un loader
 - Il est possible de lier le contrat à un projet global
+- Optimisation graphique de la barre de progression
+- Optimisation graphique du décompte des recettes
+- Optimisation graphique de la page d'impression
 
 ## Déploiement en local
 
