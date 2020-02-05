@@ -882,10 +882,10 @@ class App extends Component {
                 )
               } else {
                 return (
-                  <div>
+                  
+                    <div className="stamp isapproved">Signé</div>
 
-
-                  </div>
+                  
                 )
               }
             })()}

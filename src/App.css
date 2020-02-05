@@ -9,6 +9,30 @@ body {
   border: none;
 }
 
+.stamp {
+  transform: rotate(12deg);
+  color: #555;
+  font-size: 1rem;
+  font-weight: 200;
+  border: 0.25rem solid #555;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  font-family: "Courier";
+  -webkit-mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png");
+  -webkit-mask-size: 944px 604px;
+  mix-blend-mode: multiply;
+}
+
+.isapproved {
+  color: #0a9928;
+  border: 0.2rem solid #0a9928;
+  -webkit-mask-position: 13rem 6rem;
+  transform: rotate(-14deg);
+  border-radius: 0;
+}
+
 .h5,
 h5 {
   font-size: 0.89rem;
