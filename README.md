@@ -16,7 +16,7 @@ L'application vise à gérer les droits cinématographiques et les relations con
 - En fonction des recettes saisies, l'application calcule le montant à verser aux parties prenantes du projet
 - Il est possible d'utiliser l'application sur un navigateur mobile blockchain tel que [Metamask Mobile](https://play.google.com/store/apps/details?id=io.metamask&hl=en)
 - il est possible d'ajouter des articles au contrat
-- il est possible de signer le contrat
+- Il est posible de signer le contrat ce qui empeche toutes modifications a part la saisie des recettes
 
 <p align="center">
 <img src="https://github.com/Louvivien/cinemaproductionapp/blob/master/public/screenshot.jpg">
@@ -28,11 +28,13 @@ L'application vise à gérer les droits cinématographiques et les relations con
 
 ## Fonctionnalités supplémentaires (en cours de développement)
 
-- Les producteurs peuvent signer le contrat ce qui empeche toutes modifications a part la saisie des recettes
-- Les informations sont enregistrees sous forme de hash
-- Afficher les liens vers les transactions Rinkeby
+- Le contrat peut etre signé par les autres producteurs quand un des producteur a signé
+- Les informations sont enregistrées sous forme de hash
+- Vérifier que tous les controles React sont aussi mis en place au niveau du smartcontract, notamment le blocage des fonctions de modification si la contrat a été signé
+- Avoir la possiblité de faire un avenant au contrat
+- Afficher les liens Blockchain Explorer vers les transactions Rinkeby
+- Mise en place d'un systeme de gestion des roles
 - Mise en place de tests avancés sous truffle sur les fonctionnalités existantes
-- Verifier que tous les controles React sont aussi mis en place au niveau du smartcontract
 - Mettre en place un loader
 - Il est possible de lier le contrat à un projet global
 - Optimisation graphique de la barre de progression
